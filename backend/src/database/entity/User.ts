@@ -5,9 +5,14 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   BeforeInsert,
+  OneToOne,
+  JoinColumn,
+  OneToMany,
 } from 'typeorm';
-
 import bcrypt from 'bcryptjs';
+
+import File from './File';
+import Appointment from './Appointment';
 
 @Entity()
 class User {
@@ -31,6 +36,14 @@ class User {
 
   @UpdateDateColumn({ type: 'timestamp' })
   updateAt: Date;
+
+  @OneToOne(() => File)
+  @JoinColumn()
+  avatar: File;
+
+  @OneToMany(() => Appointment, (appointment) => appointment.provider)
+  @OneToMany(() => Appointment, (appointment) => appointment.user)
+  appointments: Appointment[];
 
   @BeforeInsert()
   generatePasswordHash() {

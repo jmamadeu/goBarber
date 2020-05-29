@@ -61,7 +61,15 @@ class UserController {
   static async index(_, res: Response) {
     const userRepository = getConnection().getRepository(User);
 
-    let users = await userRepository.find();
+    let users = await userRepository.find({
+      relations: ['avatar'],
+      // join: {
+      //   alias: 'user',
+      //   innerJoinAndSelect: {
+      //     appointments: 'user.appointments',
+      //   },
+      // },
+    });
 
     users = users.map((user) =>
       Object.assign(user, { passwordHash: undefined })
