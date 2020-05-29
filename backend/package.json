@@ -10,14 +10,6 @@
     "start": "ts-node src/index.ts"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@types/bcryptjs": "^2.4.2",
-    "@types/cors": "^2.8.6",
-    "@types/jsonwebtoken": "^8.3.9",
-    "@types/multer": "^1.4.3",
-    "@types/yup": "^0.28.0",
-=======
->>>>>>> 3a6668b3b4fdb83c4a4d8333c49802097f78f757
     "bcryptjs": "^2.4.3",
     "bee-queue": "^1.2.3",
     "cors": "^2.8.5",
