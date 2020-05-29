@@ -4,6 +4,7 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  AfterLoad,
 } from 'typeorm';
 
 @Entity()
@@ -22,6 +23,13 @@ class File {
 
   @UpdateDateColumn({ type: 'timestamp' })
   updatedAt: Date;
+
+  protected url: string;
+
+  @AfterLoad()
+  getUrl() {
+    this.url = `http://localhost:3333/files/${this.path}`;
+  }
 }
 
 export default File;
