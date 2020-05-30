@@ -16,6 +16,7 @@ class SessionController {
       where: {
         email,
       },
+      relations: ['avatar'],
     });
 
     if (!user) {
@@ -31,7 +32,12 @@ class SessionController {
     });
 
     return res.json({
-      data: { id: user.id, name: user.name, email: user.email },
+      data: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        avatar: user.avatar,
+      },
       token,
     });
   }

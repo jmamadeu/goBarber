@@ -9,13 +9,8 @@
     "experimentalDecorators": true,
     "sourceMap": true,
     "esModuleInterop": true,
-    "typeRoots": ["./src/@types", "./node_modules/@types"],
-    "baseUrl": "./",
 
-    "paths": {
-      "express": ["/src/@types/express/*"]
-    }
+    "baseUrl": "./"
   },
-  "include": ["src"],
-  "files": ["./src/@types/express/index.d.ts"]
+  "include": ["src"]
 }
