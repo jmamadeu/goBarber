@@ -17,10 +17,10 @@ class UserController {
       email: Yup.string(),
       oldPassword: Yup.string(),
       password: Yup.string().when('oldPassword', (oldPassword, field) =>
-        oldPassword ? field.required() : field
+        oldPassword ? field.required() : field,
       ),
       confirmPassword: Yup.string().when('password', (password, field) =>
-        password ? field.required().oneOf([Yup.ref('password')]) : field
+        password ? field.required().oneOf([Yup.ref('password')]) : field,
       ),
     });
 
@@ -30,7 +30,10 @@ class UserController {
 
     const { email, oldPassword } = req.body;
 
-    let user = await userRepository.findOne({ where: { id: req.userId } });
+    let user = await userRepository.findOne({
+      where: { id: req.userId },
+      relations: ['avatar'],
+    });
 
     if (email !== user.email) {
       const userExists = await userRepository.findOne({ where: { email } });
@@ -71,9 +74,7 @@ class UserController {
       // },
     });
 
-    users = users.map((user) =>
-      Object.assign(user, { passwordHash: undefined })
-    );
+    users = users.map(user => Object.assign(user, { passwordHash: undefined }));
 
     return res.json({ data: users });
   }

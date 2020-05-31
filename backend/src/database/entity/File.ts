@@ -5,7 +5,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   AfterLoad,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
+import User from './User';
 
 @Entity()
 class File {
@@ -24,11 +27,15 @@ class File {
   @UpdateDateColumn({ type: 'timestamp' })
   updatedAt: Date;
 
+  @OneToOne(() => User, user => user.avatar)
+  @JoinColumn()
+  user: User;
+
   protected url: string;
 
   @AfterLoad()
   getUrl() {
-    this.url = `http://localhost:3333/files/${this.path}`;
+    this.url = `http://localhost:3333/avatar/${this.path}`;
   }
 }
 

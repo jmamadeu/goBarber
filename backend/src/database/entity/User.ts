@@ -37,12 +37,11 @@ class User {
   @UpdateDateColumn({ type: 'timestamp' })
   updateAt: Date;
 
-  @OneToOne(() => File)
-  @JoinColumn()
+  @OneToOne(() => File, file => file.user)
   avatar: File;
 
-  @OneToMany(() => Appointment, (appointment) => appointment.provider)
-  @OneToMany(() => Appointment, (appointment) => appointment.user)
+  @OneToMany(() => Appointment, appointment => appointment.provider)
+  @OneToMany(() => Appointment, appointment => appointment.user)
   appointments: Appointment[];
 
   @BeforeInsert()
